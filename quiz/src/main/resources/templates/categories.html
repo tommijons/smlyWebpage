@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories</title>
+</head>
+<body>
+<h2>Pick a category</h2>
+<button th:onclick="|window.location.href='/'|" th:each="q:${questions}" th:text="${q.optionA}"></button>
+<button th:onclick="|window.location.href='/'|" th:each="q:${questions}" th:text="${q.optionB}"></button>
+<button th:onclick="|window.location.href='/'|" th:each="q:${questions}" th:text="${q.optionC}"></button>
+<button th:onclick="|window.location.href='/'|" th:each="q:${questions}" th:text="${q.optionD}"></button>
+</body>
+</html>

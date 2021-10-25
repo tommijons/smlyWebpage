@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+</head>
+<body>
+
+<div th:switch="${questions}">
+    <h2 th:case="null">Congratulations!</h2>
+    <div th:case="*">
+        <h2> Questions </h2>
+        <h2 th:each="q:${questions}" th:text="${q.questionText}"></h2>
+        <button th:onclick="|window.location.href='/'|" th:each="q:${questions}" th:text="${q.optionA}"></button>
+        <button th:onclick="|window.location.href='/'|" th:each="q:${questions}" th:text="${q.optionB}"></button>
+        <button th:onclick="|window.location.href='/'|" th:each="q:${questions}" th:text="${q.optionC}"></button>
+        <button th:onclick="|window.location.href='/'|" th:each="q:${questions}" th:text="${q.optionD}"></button>
+    </div>
+    <p><a href="/addquestion">Add a new question</a></p>
+
+</div>
+</body>
+</html>

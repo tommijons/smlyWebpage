@@ -6,22 +6,24 @@ import java.util.List;
 
 //@Entity
 public class Category {
-    private int id;
-    private String categoryName;
+    public long ID;
+    // public for now
+    public String categoryName;
+    public int categoryID;
     //private List<Question> questions = new ArrayList<>();
 
-    public Category(int id, String categoryName) {
-        this.id = id;
+    public Category(int categoryID, String categoryName) {
+        this.categoryID =categoryID;
         this.categoryName=categoryName;
         //this.questions = questions;
     }
 
-    public int getId() {
-        return id;
+    public long getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(long ID) {
+        this.ID = ID;
     }
 
     /*public List<Question> getQuestions() {

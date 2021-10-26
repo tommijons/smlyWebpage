@@ -6,12 +6,12 @@
 </head>
 <body>
 
-<div th:switch="${questions}">
+<div th:switch="${categories}">
     <h2 th:case="null">No questions yet!</h2>
     <div th:case="*">
         <h2> Pick a category! </h2>
-        <form th:action="@{/}" th:each="c:${categories}">
-            <button th:onclick="|window.location.href='/'|" th:each="c:${categories}" th:text="${c.categoryName}"></button>
+        <form th:each="c:${categories}" th:action="@{'/category/'+${c.ID}}" method="get">
+        <button th:text="${c.categoryName}"></button>
         </form>
     </div>
     <p><a href="/addquestion">Add a new question</a></p>

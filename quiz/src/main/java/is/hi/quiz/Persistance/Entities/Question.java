@@ -2,7 +2,7 @@ package is.hi.quiz.Persistance.Entities;
 
 public class Question {
     private long ID;
-    private int categoryID;
+    private long categoryID;
     private String questionText;
     private String correctAnswer;
     private String optionA;
@@ -41,7 +41,7 @@ public class Question {
         this.ID = ID;
     }
 
-    public int getCategoryID() {
+    public long getCategoryID() {
         return categoryID;
     }
 

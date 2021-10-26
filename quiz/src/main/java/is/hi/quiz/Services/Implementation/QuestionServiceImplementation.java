@@ -14,16 +14,17 @@ public class QuestionServiceImplementation implements QuestionService {
     private List<Question> questionRepository= new ArrayList<>();
     private List<Category> categories = new ArrayList<>();
     private int id_counter=0;
+    private int id_counter2=0;
 
     @Autowired
     public QuestionServiceImplementation() {
         // Dummy data. To be removed when JPA added.
-        questionRepository.add(new Question(1,"Hvað er uppáhalds maturinn þinn?","Kjúklingur","Hamborgari","Pizza","Kjúklingur","Ostrur"));
+        questionRepository.add(new Question(0,"Hvað er uppáhalds maturinn þinn?","Kjúklingur","Hamborgari","Pizza","Kjúklingur","Ostrur"));
         questionRepository.add(new Question(1,"Hver er forseti Íslands ?","Guðni Th","Guðni Th","Óli Grís","Vigga Finn","Holy B"));
         questionRepository.add(new Question(1,"Hver er höfuðborg Danmerkur ?","Kaupmannahöfn","Álaborg","Kaupmannahöfn","Esbjerg","Roskilde"));
         questionRepository.add(new Question(2,"Hvað er klukkan?","21:00","16:30","12:00","21:00","19:45"));
         questionRepository.add(new Question(2,"Hvert er hæsta fjall heims ?","Everest","Treveste","Estever","Vesterne","Everest"));
-        questionRepository.add(new Question(2,"Hver er best/ur ?","Ég","Ég","Hann","Hún","Þú"));
+        questionRepository.add(new Question(3,"Hver er best/ur ?","Ég","Ég","Hann","Hún","Þú"));
 
         categories.add(new Category(1,"Landafræði"));
         categories.add(new Category(1,"Íþróttir"));
@@ -34,6 +35,11 @@ public class QuestionServiceImplementation implements QuestionService {
             q.setID(id_counter);
             id_counter++;
         }
+        for(Category c: categories){
+            c.setID(id_counter2);
+            id_counter2++;
+        }
+
     }
     @Override
     public List <Category> findAllCategories(){

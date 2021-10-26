@@ -1,5 +1,6 @@
 package is.hi.quiz.Controllers;
 
+import is.hi.quiz.Persistance.Entities.Category;
 import is.hi.quiz.Persistance.Entities.Question;
 import is.hi.quiz.Services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,21 +28,35 @@ public class QuizController {
     public String AccountController(Model model){
         // Model of class structure that allows to insert data into templates and http session
         // Business logic
-       //List<Question> allQuestions = questionService.findAll();
-        Question nextQuestion;
-     //  if(getNextQuestion()!=null) {
-           // Call a method in service class
-           // Add some data to the model
-           nextQuestion = getNextQuestion();
-           model.addAttribute("questions", nextQuestion);
-           return "displayQuestions";
-     //  }
-       //return "home";
+        List<Question> allQuestions1 = questionService.findAll();
+        List<Category> allCategories = questionService.findAllCategories();
+        for(Category c:allCategories) {
+            System.out.println(c.categoryName+c.ID);
+        }
+        //  if(getNextQuestion()!=null) {
+        // Call a method in service class
+        // Add some data to the model
+        model.addAttribute("categories", allCategories);
+        return "home";
     }
+
+    @GetMapping("/category/{id}")
+    public String getQuestions(@PathVariable("id")long id,Model model){
+        // Model of class structure that allows to insert data into templates and http session
+        // Business logic
+        // Call a method in service class
+        // Add some data to the model
+        System.out.println(id);
+        Question nextQuestion;
+        nextQuestion = getNextQuestion(id);
+        model.addAttribute("questions", nextQuestion);
+        return "displayQuestions";
+    }
+
     //@RequestMapping(value="/nextQuestion",method = RequestMethod.GET)
-    // Handles the questions, displays next question when one of the answer buttons is clicked.
-    public Question getNextQuestion(){
-        List<Question> allQuestions = questionService.findByCategory( 2);
+    public Question getNextQuestion(long id){
+        // Handles the questions, displays next question when one of the answer buttons is clicked.
+        List<Question> allQuestions = questionService.findByCategory((int) id);
         if(i < allQuestions.size()){
             Question question = allQuestions.get(i);
             // Increment to get next question

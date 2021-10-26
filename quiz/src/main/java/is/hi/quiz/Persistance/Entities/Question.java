@@ -2,7 +2,7 @@ package is.hi.quiz.Persistance.Entities;
 
 public class Question {
     private long ID;
-    private long categoryID;
+    private int categoryID;
     private String questionText;
     private String correctAnswer;
     private String optionA;
@@ -14,15 +14,7 @@ public class Question {
 // constructor
     public Question(){
     }
-    /*
-    public Book(String title, String doi, String description, double rating, String genre){
-        this.title=title;
-        this.doi=doi;
-        this.description=description;
-        this.rating=rating;
-        this.genre=genre;
-    }
-    **/
+
     public Question(int categoryID, String questionText, String correctAnswer, String optionA, String optionB, String optionC, String optionD) {
         this.categoryID = categoryID;
         this.questionText = questionText;
@@ -41,7 +33,7 @@ public class Question {
         this.ID = ID;
     }
 
-    public long getCategoryID() {
+    public int getCategoryID() {
         return categoryID;
     }
 

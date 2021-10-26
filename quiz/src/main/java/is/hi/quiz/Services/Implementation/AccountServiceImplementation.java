@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 public class AccountServiceImplementation implements AccountService {
-    // Here would be a Jpa link to repository
+    // Here would be a Jpa link to AccountRepository
     private List<Account> accountRepository= new ArrayList<>();
     private int id_counter=0;
 
@@ -28,7 +28,6 @@ public class AccountServiceImplementation implements AccountService {
         id_counter++;
         }
     }
-
 
     @Override
     public List<Account> findAll() {

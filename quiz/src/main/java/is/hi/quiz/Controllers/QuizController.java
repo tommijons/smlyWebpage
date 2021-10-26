@@ -14,7 +14,6 @@ import java.util.List;
 public class QuizController {
     private QuizService quizService;
     private GameStateController gsc;
-    private int questionNo;
 
     @Autowired
     public QuizController(QuizService quizService, GameStateController gsc){

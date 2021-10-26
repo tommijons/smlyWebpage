@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class QuizServiceImplementation implements QuizService {
-    // Here would be a Jpa link to repository
+    // Here would be a Jpa link to QuizRepository
     private List<Question> questionRepository= new ArrayList<>();
     private List<Category> categories = new ArrayList<>();
     private int id_counter=0;
@@ -37,7 +37,7 @@ public class QuizServiceImplementation implements QuizService {
         categories.add(new Category(2,"Category 2"));
         categories.add(new Category(3,"Category 3"));
 
-    // jpa gives each question an ID but here we add manually.
+    // Jpa gives each question an ID but here we add manually.
         for(Question q: questionRepository){
             q.setID(id_counter);
             id_counter++;

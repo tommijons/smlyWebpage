@@ -11,7 +11,7 @@ public class Question {
     private String optionD;
 
     // Private List<Question> question=new ArrayList<>():
-// constructor
+    // constructor
     public Question(){
     }
 

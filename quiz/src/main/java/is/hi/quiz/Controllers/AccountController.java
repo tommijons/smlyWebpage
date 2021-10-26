@@ -1,13 +1,15 @@
 package is.hi.quiz.Controllers;
 
-import is.hi.quiz.Services.QuestionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import is.hi.quiz.Persistance.Entities.Category;
+import is.hi.quiz.Services.QuizService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 public class AccountController {
-    private QuestionService questionService;
+    private QuizService quizService;
 
 
     @RequestMapping("/login")
@@ -18,4 +20,6 @@ public class AccountController {
         // Call a method in service class
         return "home";
     }
+
+
 }

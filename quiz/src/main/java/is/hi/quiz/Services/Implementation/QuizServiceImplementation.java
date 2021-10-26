@@ -1,7 +1,7 @@
 package is.hi.quiz.Services.Implementation;
 import is.hi.quiz.Persistance.Entities.Category;
 import is.hi.quiz.Persistance.Entities.Question;
-import is.hi.quiz.Services.QuestionService;
+import is.hi.quiz.Services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class QuestionServiceImplementation implements QuestionService {
+public class QuizServiceImplementation implements QuizService {
     // Here would be a Jpa link to repository
     private List<Question> questionRepository= new ArrayList<>();
     private List<Category> categories = new ArrayList<>();
@@ -17,7 +17,7 @@ public class QuestionServiceImplementation implements QuestionService {
     private int id_counter2=0;
 
     @Autowired
-    public QuestionServiceImplementation() {
+    public QuizServiceImplementation() {
         // Dummy data. To be removed when JPA added.
         questionRepository.add(new Question(0,"Question 1 - Category 0","OptionA","OptionA","OptionB","OptionC","OptionD"));
         questionRepository.add(new Question(0,"Question 2 - Category 0","OptionA","OptionA","OptionB","OptionC","OptionD"));

@@ -5,7 +5,7 @@ import is.hi.quiz.Persistance.Entities.Question;
 
 import java.util.List;
 
-public interface QuestionService {
+public interface QuizService {
     List <Question> findByCategory(int categoryID);
     List<Question> findAll();
     List<Category>findAllCategories();

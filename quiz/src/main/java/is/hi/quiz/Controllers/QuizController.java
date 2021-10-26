@@ -1,10 +1,7 @@
 package is.hi.quiz.Controllers;
 
-import is.hi.quiz.Persistance.Entities.Category;
 import is.hi.quiz.Persistance.Entities.Question;
-import is.hi.quiz.Services.QuestionService;
-import org.springframework.beans.factory.annotation.Autowired;
-import is.hi.quiz.Services.QuestionService;
+import is.hi.quiz.Services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +12,13 @@ import java.util.List;
 
 @Controller
 public class QuizController {
-    private QuestionService questionService;
+    private QuizService quizService;
     private GameStateController gsc;
     private int questionNo;
 
     @Autowired
-    public QuizController(QuestionService questionService, GameStateController gsc){
-        this.questionService = questionService;
+    public QuizController(QuizService quizService, GameStateController gsc){
+        this.quizService = quizService;
         this.gsc=gsc;
     }
 
@@ -39,7 +36,7 @@ public class QuizController {
     // Param is the id of chosen category.
     // Returns: A question object
     public Question getNextQuestion(long id){
-        List<Question> allQuestions = questionService.findByCategory((int) id);
+        List<Question> allQuestions = quizService.findByCategory((int) id);
         if(gsc.noOfQuestions < allQuestions.size()){
             Question question = allQuestions.get(gsc.noOfQuestions);
             // Increment to get next question
@@ -65,7 +62,7 @@ public class QuizController {
         if(result.hasErrors()){
             return "newQuestion";
         }
-        questionService.save(question);
+        quizService.save(question);
         return "redirect:/";
     }
 
@@ -73,8 +70,8 @@ public class QuizController {
     // Todo: Check if admin
     @RequestMapping(value="/delete/{id}",method = RequestMethod.GET)
     public String deleteQuestion(@PathVariable("id")long id,Model model){
-        Question questionToDelete = questionService.findById(id);
-        questionService.delete(questionToDelete);
+        Question questionToDelete = quizService.findById(id);
+        quizService.delete(questionToDelete);
         return "redirect:/";
     }
 }

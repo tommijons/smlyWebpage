@@ -6,16 +6,14 @@ import java.util.List;
 
 //@Entity
 public class Category {
-    public long ID;
-    // public for now
-    public String categoryName;
-    public int categoryID;
+    private long ID;
+    private String categoryName;
+    private int categoryID;
     //private List<Question> questions = new ArrayList<>();
 
-    public Category(int categoryID, String categoryName) {
-        this.categoryID =categoryID;
-        this.categoryName=categoryName;
-        //this.questions = questions;
+    public Category(int categoryID,String categoryName) {
+        this.categoryName = categoryName;
+        this.categoryID = categoryID;
     }
 
     public long getID() {
@@ -26,11 +24,19 @@ public class Category {
         this.ID = ID;
     }
 
-    /*public List<Question> getQuestions() {
-        return questions;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }*/
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public int getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
+    }
 }

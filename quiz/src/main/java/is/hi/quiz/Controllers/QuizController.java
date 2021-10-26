@@ -15,60 +15,51 @@ import java.util.List;
 
 @Controller
 public class QuizController {
-
     private QuestionService questionService;
-    int i=0;
+    private GameStateController gsc;
+    private int questionNo;
 
     @Autowired
-    public QuizController(QuestionService questionService){
+    public QuizController(QuestionService questionService, GameStateController gsc){
         this.questionService = questionService;
+        this.gsc=gsc;
     }
 
-    @RequestMapping("/")
-    public String AccountController(Model model){
-        // Model of class structure that allows to insert data into templates and http session
-        // Business logic
-        List<Question> allQuestions1 = questionService.findAll();
-        List<Category> allCategories = questionService.findAllCategories();
-        for(Category c:allCategories) {
-            System.out.println(c.categoryName+c.ID);
-        }
-        //  if(getNextQuestion()!=null) {
-        // Call a method in service class
-        // Add some data to the model
-        model.addAttribute("categories", allCategories);
-        return "home";
-    }
-
+    // Gets the id from chosen category and asks helper function getNextQuestion() to get questions from that category
+    // Returns: A template with one questions and 4 options to choose from.
     @GetMapping("/category/{id}")
     public String getQuestions(@PathVariable("id")long id,Model model){
-        // Model of class structure that allows to insert data into templates and http session
-        // Business logic
-        // Call a method in service class
-        // Add some data to the model
-        System.out.println(id);
         Question nextQuestion;
         nextQuestion = getNextQuestion(id);
         model.addAttribute("questions", nextQuestion);
         return "displayQuestions";
     }
 
-    //@RequestMapping(value="/nextQuestion",method = RequestMethod.GET)
+    // Helper function to get next question when button is clicked and keeps count of questions.
+    // Param is the id of chosen category.
+    // Returns: A question object
     public Question getNextQuestion(long id){
-        // Handles the questions, displays next question when one of the answer buttons is clicked.
         List<Question> allQuestions = questionService.findByCategory((int) id);
-        if(i < allQuestions.size()){
-            Question question = allQuestions.get(i);
+        if(gsc.noOfQuestions < allQuestions.size()){
+            Question question = allQuestions.get(gsc.noOfQuestions);
             // Increment to get next question
-            i++;
+            gsc.noOfQuestions++;
             return question;
         }
       return null;
     }
+
+    // Admin action - requires admin log in.
+    // Returns: A template to input a new question and answers.
+    // Todo: Check if admin
     @RequestMapping(value="/addquestion",method=RequestMethod.GET)
     public String addQuestion(Question question){
         return "newQuestion";
     }
+
+    // Admin action - requires admin log in. Adds a question.
+    // Returns: Redirects to homepage if no errors in input fields.
+    // Todo: Check if admin
     @RequestMapping(value="/addquestion",method=RequestMethod.POST)
         public String addQuestion(Question question, BindingResult result,Model model){
         if(result.hasErrors()){
@@ -78,6 +69,8 @@ public class QuizController {
         return "redirect:/";
     }
 
+    // Admin action - requires admin log in. Deletes a question
+    // Todo: Check if admin
     @RequestMapping(value="/delete/{id}",method = RequestMethod.GET)
     public String deleteQuestion(@PathVariable("id")long id,Model model){
         Question questionToDelete = questionService.findById(id);

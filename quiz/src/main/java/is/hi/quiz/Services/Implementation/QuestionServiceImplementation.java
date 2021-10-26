@@ -19,17 +19,24 @@ public class QuestionServiceImplementation implements QuestionService {
     @Autowired
     public QuestionServiceImplementation() {
         // Dummy data. To be removed when JPA added.
-        questionRepository.add(new Question(0,"Hvað er uppáhalds maturinn þinn?","Kjúklingur","Hamborgari","Pizza","Kjúklingur","Ostrur"));
-        questionRepository.add(new Question(1,"Hver er forseti Íslands ?","Guðni Th","Guðni Th","Óli Grís","Vigga Finn","Holy B"));
-        questionRepository.add(new Question(1,"Hver er höfuðborg Danmerkur ?","Kaupmannahöfn","Álaborg","Kaupmannahöfn","Esbjerg","Roskilde"));
-        questionRepository.add(new Question(2,"Hvað er klukkan?","21:00","16:30","12:00","21:00","19:45"));
-        questionRepository.add(new Question(2,"Hvert er hæsta fjall heims ?","Everest","Treveste","Estever","Vesterne","Everest"));
-        questionRepository.add(new Question(3,"Hver er best/ur ?","Ég","Ég","Hann","Hún","Þú"));
+        questionRepository.add(new Question(0,"Question 1 - Category 0","OptionA","OptionA","OptionB","OptionC","OptionD"));
+        questionRepository.add(new Question(0,"Question 2 - Category 0","OptionA","OptionA","OptionB","OptionC","OptionD"));
+        questionRepository.add(new Question(0,"Question 3 - Category 0","OptionA","OptionA","OptionB","OptionC","OptionD"));
+        questionRepository.add(new Question(1,"Question 1 - Category 1","OptionA","OptionA","OptionB","OptionC","OptionD"));
+        questionRepository.add(new Question(1,"Question 2 - Category 1","OptionA","OptionA","OptionB","OptionC","OptionD"));
+        questionRepository.add(new Question(1,"Question 3 - Category 1","OptionA","OptionA","OptionB","OptionC","OptionD"));
+        questionRepository.add(new Question(2,"Question 1 - Category 2","OptionA","OptionA","OptionB","OptionC","OptionD"));
+        questionRepository.add(new Question(2,"Question 2 - Category 2","OptionA","OptionA","OptionB","OptionC","OptionD"));
+        questionRepository.add(new Question(2,"Question 3 - Category 2","OptionA","OptionA","OptionB","OptionC","OptionD"));
+        questionRepository.add(new Question(3,"Question 1 - Category 3","OptionA","OptionA","OptionB","OptionC","OptionD"));
+        questionRepository.add(new Question(3,"Question 2 - Category 3","OptionA","OptionA","OptionB","OptionC","OptionD"));
+        questionRepository.add(new Question(3,"Question 3 - Category 3","OptionA","OptionA","OptionB","OptionC","OptionD"));
 
-        categories.add(new Category(1,"Landafræði"));
-        categories.add(new Category(1,"Íþróttir"));
-        categories.add(new Category(1,"Skemmtun"));
-        categories.add(new Category(1,"Tölvuleikir"));
+        categories.add(new Category(0,"Category 0"));
+        categories.add(new Category(1,"Category 1"));
+        categories.add(new Category(2,"Category 2"));
+        categories.add(new Category(3,"Category 3"));
+
     // jpa gives each question an ID but here we add manually.
         for(Question q: questionRepository){
             q.setID(id_counter);
@@ -39,12 +46,13 @@ public class QuestionServiceImplementation implements QuestionService {
             c.setID(id_counter2);
             id_counter2++;
         }
-
     }
+
     @Override
     public List <Category> findAllCategories(){
         return categories;
     }
+
     // Get questions by category
     @Override
     public List <Question> findByCategory(int categoryID) {

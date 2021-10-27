@@ -4,19 +4,19 @@ import java.util.ArrayList;
 
 public class Account {
     private long ID;
-    private String userName;
+    private String username;
     private String password;
     private String email;
     private String name;
     //private List<Scores> scores = new ArrayList<>();
     private boolean isAdmin;
 
-    public Account(String userName, String password, String email, String name, boolean isAdmin) {
-        this.userName = userName;
+    public Account(String username, String password, String email, String name, Boolean isAdmin) {
+        this.username = username;
         this.password = password;
         this.email = email;
         this.name = name;
-        this.isAdmin = isAdmin;
+        //this.isAdmin = isAdmin;
     }
 
     public long getID() {
@@ -27,12 +27,12 @@ public class Account {
         this.ID = ID;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -64,6 +64,6 @@ public class Account {
     }
 
     public void setAdmin(boolean admin) {
-        isAdmin = admin;
+        isAdmin = isAdmin;
     }
 }

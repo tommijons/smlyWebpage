@@ -11,4 +11,6 @@ public interface AccountService {
     Account findById(long ID);
     Account save(Account account);
     void delete(Account account);
+    Account findByUsername(String username);
+    Account login(Account account);
 }

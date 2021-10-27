@@ -58,4 +58,27 @@ public class AccountServiceImplementation implements AccountService {
     public void delete(Account account) {
         accountRepository.remove(account);
     }
+
+    @Override
+    public Account findByUsername(String username) {
+        for(Account a: accountRepository){
+            if((username).equals(a.getUsername())){
+                System.out.println(username+a.getUsername());
+                return a;
+            }
+        }
+        return null;
+        //return accountRepository.findByUsername(username);
+    }
+
+    @Override
+    public Account login(Account account) {
+        Account doesExist = findByUsername(account.getUsername());
+        if(doesExist != null){
+            if(doesExist.getPassword().equals(account.getPassword())){
+                return doesExist;
+            }
+        }
+        return null;
+    }
 }

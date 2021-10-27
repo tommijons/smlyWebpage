@@ -9,7 +9,7 @@
 <div th:switch="${questions}">
     <div th:case="null">
     <h2>Quiz over!</h2>
-    <p><a href="/">Play a new game</a></p>
+    <p><a href="/quiz">Play a new game</a></p>
     </div>
     <div th:case="*">
         <h2> Questions </h2>

@@ -13,12 +13,12 @@ import java.util.List;
 @Controller
 public class QuizController {
     private QuizService quizService;
-    private GameStateController gsc;
+    //private GameStateController gsc; -> QuizService og QuizImplementationService sjá um þettta nuna
 
     @Autowired
     public QuizController(QuizService quizService, GameStateController gsc){
         this.quizService = quizService;
-        this.gsc=gsc;
+        //this.gsc=gsc;
     }
 
     // Gets the id from chosen category and asks helper function getNextQuestion() to get questions from that category
@@ -36,10 +36,10 @@ public class QuizController {
     // Returns: A question object
     public Question getNextQuestion(long id){
         List<Question> allQuestions = quizService.findByCategory((int) id);
-        if(gsc.noOfQuestions < allQuestions.size()){
-            Question question = allQuestions.get(gsc.noOfQuestions);
+        if(quizService.getNoOfQuestions()< allQuestions.size()){
+            Question question = allQuestions.get(quizService.getNoOfQuestions());
             // Increment to get next question
-            gsc.noOfQuestions++;
+            quizService.incrementNoOfQuestion();
             return question;
         }
       return null;

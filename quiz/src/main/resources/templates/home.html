@@ -1,21 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Quiz</title>
+    <title>Title</title>
 </head>
 <body>
-
-<div th:switch="${categories}">
-    <h2 th:case="null">No questions yet!</h2>
-    <div th:case="*">
-        <h2> Pick a category! </h2>
-        <form th:each="c:${categories}" th:action="@{'/category/'+${c.ID}}" method="get">
-        <button th:text="${c.categoryName}"></button>
-        </form>
-    </div>
-    <p><a href="/addquestion">Add a new question</a></p>
-
-</div>
+<p><a href="/quiz">Start quiz</a></p>
 </body>
 </html>

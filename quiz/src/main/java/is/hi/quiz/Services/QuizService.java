@@ -12,4 +12,7 @@ public interface QuizService {
     Question findById(long ID);
     Question save(Question question);
     void delete(Question question);
+    int getNoOfQuestions();
+    int resetNoOfQuestions();
+    int incrementNoOfQuestion();
 }

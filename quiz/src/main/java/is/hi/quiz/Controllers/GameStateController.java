@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 public class GameStateController {
     private QuizService quizService;
-    public int noOfQuestions;
+    //public int noOfQuestions; í staðinn er quizService og quizImplementationSwrvice að halda utan um noQuestions.
 
     @Autowired
     public GameStateController(QuizService quizService){
@@ -21,12 +21,12 @@ public class GameStateController {
 
     // Lists available categories for the quiz
     // Returns: Template for category page
-    @RequestMapping("/")
+    @RequestMapping("/quiz")
     public String AccountController(Model model){
-        noOfQuestions=0;
+        quizService.resetNoOfQuestions();
         List<Category> allCategories = quizService.findAllCategories();
         model.addAttribute("categories", allCategories);
-        return "home";
+        return "quizPage";
     }
 
     // Todo: Show high scores

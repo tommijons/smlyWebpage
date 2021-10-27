@@ -15,6 +15,7 @@ public class QuizServiceImplementation implements QuizService {
     private List<Category> categories = new ArrayList<>();
     private int id_counter=0;
     private int id_counter2=0;
+    private int noOfQuestions=0;
 
     @Autowired
     public QuizServiceImplementation() {
@@ -64,6 +65,20 @@ public class QuizServiceImplementation implements QuizService {
         }
         return quiz;
     }
+
+   @Override
+    public int resetNoOfQuestions(){
+        return noOfQuestions=0;
+    }
+    @Override
+    public int getNoOfQuestions(){
+        return noOfQuestions;
+    }
+    @Override
+    public int incrementNoOfQuestion(){
+        return noOfQuestions++;
+    }
+
     // We probably won't need this one.
     @Override
     public List<Question> findAll() {

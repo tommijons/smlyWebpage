@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class Account {
     private long ID;
     public String username;
-    private String password;
-    private String email;
-    private String name;
+    public String password;
+    public String email;
+    public String name;
     //private List<Scores> scores = new ArrayList<>();
-    private Boolean isAdmin;
+    public Boolean isAdmin;
 
     public Account(String username, String password, String email, String name, Boolean isAdmin) {
         this.username = username;

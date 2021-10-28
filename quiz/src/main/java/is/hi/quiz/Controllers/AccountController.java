@@ -46,15 +46,19 @@ public class AccountController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPOST(Account account, BindingResult result, Model model, HttpSession session){
+        List <Account> acc = accountService.findAll();
+        for(Account a:acc)System.out.println("mjá"+a.isAdmin());
         if(result.hasErrors()){
             return "login";
         }
         Account exists = accountService.login(account);
         List<Question> allQuestions = quizService.findAll();
         if(exists != null){
+            System.out.println("EXISTS");
             session.setAttribute("LoggedInUser", exists);
             model.addAttribute("LoggedInUser",exists);
             model.addAttribute("questions",allQuestions);
+            System.out.println(exists);
             if(exists.isAdmin()){
                 //model.addAttribute("admin",exists);
                 return "redirect:/admin";

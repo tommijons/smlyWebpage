@@ -48,6 +48,7 @@ public class AccountServiceImplementation implements AccountService {
     public Account save(Account account) {
         account.setID(id_counter);
         id_counter++;
+        account.isAdmin=false;
         accountRepository.add(account);
         return account;
     }

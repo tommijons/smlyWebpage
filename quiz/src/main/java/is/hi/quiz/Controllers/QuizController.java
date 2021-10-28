@@ -47,7 +47,6 @@ public class QuizController {
 
     // Admin action - requires admin log in.
     // Returns: A template to input a new question and answers.
-    // Todo: Check if admin
     @RequestMapping(value="/addquestion",method=RequestMethod.GET)
     public String addQuestion(Question question){
         return "newQuestion";
@@ -55,7 +54,6 @@ public class QuizController {
 
     // Admin action - requires admin log in. Adds a question.
     // Returns: Redirects to homepage if no errors in input fields.
-    // Todo: Check if admin
     @RequestMapping(value="/addquestion",method=RequestMethod.POST)
         public String addQuestion(Question question, BindingResult result,Model model){
         if(result.hasErrors()){

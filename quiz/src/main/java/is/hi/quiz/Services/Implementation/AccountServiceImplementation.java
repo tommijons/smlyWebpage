@@ -44,7 +44,6 @@ public class AccountServiceImplementation implements AccountService {
         return null;
     }
 
-    // Admin required for this action
     @Override
     public Account save(Account account) {
         account.setID(id_counter);
@@ -53,7 +52,6 @@ public class AccountServiceImplementation implements AccountService {
         return account;
     }
 
-    // Admin required for this action
     @Override
     public void delete(Account account) {
         accountRepository.remove(account);
@@ -63,7 +61,6 @@ public class AccountServiceImplementation implements AccountService {
     public Account findByUsername(String username) {
         for(Account a: accountRepository){
             if((username).equals(a.getUsername())){
-                System.out.println(username+a.getUsername());
                 return a;
             }
         }

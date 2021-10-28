@@ -1,5 +1,6 @@
 package is.hi.quiz.Controllers;
 
+import is.hi.quiz.Persistance.Entities.Account;
 import is.hi.quiz.Persistance.Entities.Category;
 import is.hi.quiz.Services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class GameStateController {
     public String AccountController(Model model){
         quizService.resetNoOfQuestions();
         List<Category> allCategories = quizService.findAllCategories();
-        model.addAttribute("categories", allCategories);
+        model.addAttribute("categories" ,allCategories);
         return "quizPage";
     }
 

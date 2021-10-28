@@ -1,7 +1,9 @@
 package is.hi.quiz.Controllers;
 
 import is.hi.quiz.Persistance.Entities.Account;
+import is.hi.quiz.Persistance.Entities.Question;
 import is.hi.quiz.Services.AccountService;
+import is.hi.quiz.Services.QuizService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,13 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class AccountController {
     AccountService accountService;
+    QuizService quizService;
 
-    public AccountController(AccountService accountService) {
+    public AccountController(AccountService accountService, QuizService quizService) {
         this.accountService = accountService;
+        this.quizService = quizService;
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
@@ -41,18 +46,29 @@ public class AccountController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPOST(Account account, BindingResult result, Model model, HttpSession session){
-        //for(Account a:accountService.findAll())System.out.println(a.username+a.password);
         if(result.hasErrors()){
             return "login";
         }
         Account exists = accountService.login(account);
-        //System.out.println(exists);
+        List<Question> allQuestions = quizService.findAll();
         if(exists != null){
             session.setAttribute("LoggedInUser", exists);
-            model.addAttribute("LoggedInUser", exists);
-            return "LoggedInUser";
+            model.addAttribute("LoggedInUser",exists);
+            model.addAttribute("questions",allQuestions);
+            if(exists.isAdmin()){
+                long id = exists.getID();
+                return "redirect:/admin";
+            }
+            else return "LoggedInUser";
         }
         return "redirect:/";
+    }
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+        public String adminPage(Model model, Account account){
+        // find by id
+        System.out.println(account.username);
+         model.addAttribute("admin",account);
+        return "admin";
     }
 
     @RequestMapping("/")

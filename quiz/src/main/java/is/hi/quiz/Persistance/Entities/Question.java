@@ -3,7 +3,7 @@ package is.hi.quiz.Persistance.Entities;
 public class Question {
     private long ID;
     private int categoryID;
-    private String questionText;
+    public String questionText;
     private String correctAnswer;
     private String optionA;
     private String optionB;

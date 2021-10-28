@@ -62,15 +62,14 @@ public class QuizController {
             return "newQuestion";
         }
         quizService.save(question);
-        return "redirect:/";
+        return "redirect:/admin";
     }
 
     // Admin action - requires admin log in. Deletes a question
-    // Todo: Check if admin-done
     @RequestMapping(value="/delete/{id}",method = RequestMethod.GET)
     public String deleteQuestion(@PathVariable("id")long id,Model model){
         Question questionToDelete = quizService.findById(id);
         quizService.delete(questionToDelete);
-        return "redirect:/delete";
+        return "redirect:/admin";
     }
 }

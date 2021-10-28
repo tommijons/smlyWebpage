@@ -56,7 +56,7 @@ public class AccountController {
             model.addAttribute("LoggedInUser",exists);
             model.addAttribute("questions",allQuestions);
             if(exists.isAdmin()){
-                long id = exists.getID();
+                //model.addAttribute("admin",exists);
                 return "redirect:/admin";
             }
             else return "LoggedInUser";
@@ -65,9 +65,8 @@ public class AccountController {
     }
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
         public String adminPage(Model model, Account account){
-        // find by id
-        System.out.println(account.username);
-         model.addAttribute("admin",account);
+        List <Question> questions = quizService.findAll();
+        model.addAttribute("questions",questions);
         return "admin";
     }
 

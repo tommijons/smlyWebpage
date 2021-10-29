@@ -13,7 +13,6 @@ import java.util.List;
 @Controller
 public class QuizController {
     private QuizService quizService;
-    //private GameStateController gsc; -> QuizService og QuizImplementationService sjá um þettta nuna
 
     @Autowired
     public QuizController(QuizService quizService, GameStateController gsc){

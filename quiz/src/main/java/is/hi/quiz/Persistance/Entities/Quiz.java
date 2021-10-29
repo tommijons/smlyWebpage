@@ -1,7 +1,7 @@
 package is.hi.quiz.Persistance.Entities;
 
 import java.util.Timer;
-
+// Todo implement with category entity and questions
 public class Quiz {
     long ID;
     Category category;

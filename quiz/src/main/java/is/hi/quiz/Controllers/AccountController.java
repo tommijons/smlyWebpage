@@ -7,6 +7,7 @@ import is.hi.quiz.Services.QuizService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -74,14 +75,12 @@ public class AccountController {
         return "admin";
     }
 
-    @RequestMapping("/")
-    public String AccountController(){
+    @GetMapping("/")
+    public String style(){
         // Model of class structure that allows to insert data into templates and http session
         // Busniess logic
         // Add some data to the model
         // Call a method in service class
         return "home";
     }
-
-
 }

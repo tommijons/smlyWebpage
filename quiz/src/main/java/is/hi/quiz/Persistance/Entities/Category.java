@@ -9,11 +9,20 @@ public class Category {
     private long ID;
     private String categoryName;
     private int categoryID;
-    //private List<Question> questions = new ArrayList<>();
+    private List<Question> questions;
 
-    public Category(int categoryID,String categoryName) {
+    public Category(int categoryID, String categoryName, List<Question> questions) {
         this.categoryName = categoryName;
         this.categoryID = categoryID;
+        this.questions = questions;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
     public long getID() {

@@ -1,6 +1,7 @@
 package is.hi.quiz.Services.Implementation;
 import is.hi.quiz.Persistance.Entities.Category;
 import is.hi.quiz.Persistance.Entities.Question;
+import is.hi.quiz.Persistance.Entities.Quiz;
 import is.hi.quiz.Services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ public class QuizServiceImplementation implements QuizService {
     // Here would be a Jpa link to QuizRepository
     private List<Question> questionRepository= new ArrayList<>();
     private List<Category> categories = new ArrayList<>();
+    private Quiz quiz;
     private int id_counter=0;
     private int id_counter2=0;
     private int noOfQuestions=0;
@@ -20,35 +22,48 @@ public class QuizServiceImplementation implements QuizService {
     @Autowired
     public QuizServiceImplementation() {
         // Dummy data. To be removed when JPA added.
-        questionRepository.add(new Question(0,"Question 1 - Category 0","OptionA","OptionA","OptionB","OptionC","OptionD"));
-        questionRepository.add(new Question(0,"Question 2 - Category 0","OptionA","OptionA","OptionB","OptionC","OptionD"));
-        questionRepository.add(new Question(0,"Question 3 - Category 0","OptionA","OptionA","OptionB","OptionC","OptionD"));
-        questionRepository.add(new Question(1,"Question 1 - Category 1","OptionA","OptionA","OptionB","OptionC","OptionD"));
-        questionRepository.add(new Question(1,"Question 2 - Category 1","OptionA","OptionA","OptionB","OptionC","OptionD"));
-        questionRepository.add(new Question(1,"Question 3 - Category 1","OptionA","OptionA","OptionB","OptionC","OptionD"));
-        questionRepository.add(new Question(2,"Question 1 - Category 2","OptionA","OptionA","OptionB","OptionC","OptionD"));
-        questionRepository.add(new Question(2,"Question 2 - Category 2","OptionA","OptionA","OptionB","OptionC","OptionD"));
-        questionRepository.add(new Question(2,"Question 3 - Category 2","OptionA","OptionA","OptionB","OptionC","OptionD"));
-        questionRepository.add(new Question(3,"Question 1 - Category 3","OptionA","OptionA","OptionB","OptionC","OptionD"));
-        questionRepository.add(new Question(3,"Question 2 - Category 3","OptionA","OptionA","OptionB","OptionC","OptionD"));
-        questionRepository.add(new Question(3,"Question 3 - Category 3","OptionA","OptionA","OptionB","OptionC","OptionD"));
+        questionRepository.add(new Question(0, "Question 1 - Category 0", "OptionA", "OptionA", "OptionB", "OptionC", "OptionD"));
+        questionRepository.add(new Question(0, "Question 2 - Category 0", "OptionA", "OptionA", "OptionB", "OptionC", "OptionD"));
+        questionRepository.add(new Question(0, "Question 3 - Category 0", "OptionA", "OptionA", "OptionB", "OptionC", "OptionD"));
+        questionRepository.add(new Question(1, "Question 1 - Category 1", "OptionA", "OptionA", "OptionB", "OptionC", "OptionD"));
+        questionRepository.add(new Question(1, "Question 2 - Category 1", "OptionA", "OptionA", "OptionB", "OptionC", "OptionD"));
+        questionRepository.add(new Question(1, "Question 3 - Category 1", "OptionA", "OptionA", "OptionB", "OptionC", "OptionD"));
+        questionRepository.add(new Question(2, "Question 1 - Category 2", "OptionA", "OptionA", "OptionB", "OptionC", "OptionD"));
+        questionRepository.add(new Question(2, "Question 2 - Category 2", "OptionA", "OptionA", "OptionB", "OptionC", "OptionD"));
+        questionRepository.add(new Question(2, "Question 3 - Category 2", "OptionA", "OptionA", "OptionB", "OptionC", "OptionD"));
+        questionRepository.add(new Question(3, "Question 1 - Category 3", "OptionA", "OptionA", "OptionB", "OptionC", "OptionD"));
+        questionRepository.add(new Question(3, "Question 2 - Category 3", "OptionA", "OptionA", "OptionB", "OptionC", "OptionD"));
+        questionRepository.add(new Question(3, "Question 3 - Category 3", "OptionA", "OptionA", "OptionB", "OptionC", "OptionD"));
 
-        categories.add(new Category(0,"Category 0"));
-        categories.add(new Category(1,"Category 1"));
-        categories.add(new Category(2,"Category 2"));
-        categories.add(new Category(3,"Category 3"));
+        categories.add(new Category(0, "Category 0", questionRepository));
+        categories.add(new Category(1, "Category 1", questionRepository));
+        categories.add(new Category(2, "Category 2", questionRepository));
+        categories.add(new Category(3, "Category 3", questionRepository));
 
-    // Jpa gives each question an ID but here we add manually.
-        for(Question q: questionRepository){
+        //quiz=new Quiz(categories,)
+
+        // Jpa gives each question an ID but here we add manually.
+        for (Question q : questionRepository) {
             q.setID(id_counter);
             id_counter++;
         }
-        for(Category c: categories){
+        for (Category c : categories) {
             c.setID(id_counter2);
             id_counter2++;
         }
-    }
+        // Add questions from dummy question db to relevant categories to make a "question package" for each category.
+        for (int j = 0; j < categories.size(); j++) {
+            List<Question> questionList = new ArrayList<>();
+            for (int i = 0; i < questionRepository.size(); i++) {
+                if (categories.get(j).getCategoryID() == questionRepository.get(i).getCategoryID()) {
+                    questionList.add(questionRepository.get(i));
+                }
+            }
+            categories.get(j).setQuestions(questionList);
+        }
 
+
+    }
     @Override
     public List <Category> findAllCategories(){
         return categories;
@@ -64,9 +79,21 @@ public class QuizServiceImplementation implements QuizService {
             }
         }
         return quiz;
+
     }
 
-   @Override
+    @Override
+    public Quiz getQuiz(int categoryID,int noOfplayers) {
+        for(Category c: categories) {
+            if (categoryID == c.getID()) {
+                quiz = new Quiz(c, noOfplayers);
+                return quiz;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public int resetNoOfQuestions(){
         return noOfQuestions=0;
     }

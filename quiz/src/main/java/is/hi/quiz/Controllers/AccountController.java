@@ -2,6 +2,7 @@ package is.hi.quiz.Controllers;
 
 import is.hi.quiz.Persistance.Entities.Account;
 import is.hi.quiz.Persistance.Entities.Question;
+import is.hi.quiz.Persistance.Entities.Quiz;
 import is.hi.quiz.Services.AccountService;
 import is.hi.quiz.Services.QuizService;
 import org.springframework.stereotype.Controller;
@@ -42,29 +43,26 @@ public class AccountController {
     }
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginGET(Account account){
-        return "login";
+        return "login.html";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPOST(Account account, BindingResult result, Model model, HttpSession session){
         List <Account> acc = accountService.findAll();
-        for(Account a:acc)System.out.println("mjá"+a.isAdmin());
         if(result.hasErrors()){
             return "login";
         }
         Account exists = accountService.login(account);
+        // Get all questions for admin delete and/or admin add question.
         List<Question> allQuestions = quizService.findAll();
         if(exists != null){
-            System.out.println("EXISTS");
             session.setAttribute("LoggedInUser", exists);
             model.addAttribute("LoggedInUser",exists);
             model.addAttribute("questions",allQuestions);
-            System.out.println(exists);
             if(exists.isAdmin()){
-                //model.addAttribute("admin",exists);
                 return "redirect:/admin";
             }
-            else return "LoggedInUser";
+            else return "LoggedInUser.html";
         }
         return "redirect:/";
     }
@@ -72,7 +70,7 @@ public class AccountController {
         public String adminPage(Model model, Account account){
         List <Question> questions = quizService.findAll();
         model.addAttribute("questions",questions);
-        return "admin";
+        return "admin.html";
     }
 
     @GetMapping("/")
@@ -81,6 +79,6 @@ public class AccountController {
         // Busniess logic
         // Add some data to the model
         // Call a method in service class
-        return "home";
+        return "home.html";
     }
 }

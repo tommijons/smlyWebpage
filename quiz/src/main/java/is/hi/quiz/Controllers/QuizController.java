@@ -1,6 +1,7 @@
 package is.hi.quiz.Controllers;
 
 import is.hi.quiz.Persistance.Entities.Question;
+import is.hi.quiz.Persistance.Entities.Quiz;
 import is.hi.quiz.Services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,6 @@ public class QuizController {
     @Autowired
     public QuizController(QuizService quizService, GameStateController gsc){
         this.quizService = quizService;
-        //this.gsc=gsc;
     }
 
     // Gets the id from chosen category and asks helper function getNextQuestion() to get questions from that category
@@ -27,14 +27,16 @@ public class QuizController {
         Question nextQuestion;
         nextQuestion = getNextQuestion(id);
         model.addAttribute("questions", nextQuestion);
-        return "displayQuestions";
+        return "displayQuestion.html";
     }
+
 
     // Helper function to get next question when button is clicked and keeps count of questions.
     // Param is the id of chosen category.
     // Returns: A question object
     public Question getNextQuestion(long id){
-        List<Question> allQuestions = quizService.findByCategory((int) id);
+        Quiz quiz= quizService.getQuiz((int)id,1);
+        List<Question> allQuestions = quiz.getCategory().getQuestions();
         if(quizService.getNoOfQuestions()< allQuestions.size()){
             Question question = allQuestions.get(quizService.getNoOfQuestions());
             // Increment to get next question
@@ -48,7 +50,7 @@ public class QuizController {
     // Returns: A template to input a new question and answers.
     @RequestMapping(value="/addquestion",method=RequestMethod.GET)
     public String addQuestion(Question question){
-        return "newQuestion";
+        return "newQuestion.html";
     }
 
     // Admin action - requires admin log in. Adds a question.
@@ -56,7 +58,7 @@ public class QuizController {
     @RequestMapping(value="/addquestion",method=RequestMethod.POST)
         public String addQuestion(Question question, BindingResult result,Model model){
         if(result.hasErrors()){
-            return "newQuestion";
+            return "newQuestion.html";
         }
         quizService.save(question);
         return "redirect:/admin";

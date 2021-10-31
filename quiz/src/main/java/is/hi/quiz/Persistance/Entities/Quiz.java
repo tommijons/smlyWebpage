@@ -1,16 +1,17 @@
 package is.hi.quiz.Persistance.Entities;
 
+import java.util.List;
 import java.util.Timer;
 // Todo implement with category entity and questions
 public class Quiz {
     long ID;
     Category category;
-    Timer timer;
+    //Timer timer;
     int noOfPlayers;
-
-    public Quiz(Category category, Timer timer, int noOfPlayers) {
+ // List category has a list of questions.
+    public Quiz(Category category,  int noOfPlayers) {
         this.category = category;
-        this.timer = timer;
+      //  this.timer = timer;
         this.noOfPlayers = noOfPlayers;
     }
 
@@ -30,14 +31,15 @@ public class Quiz {
         this.category = category;
     }
 
-    public Timer getTimer() {
-        return timer;
-    }
+    /*
+        public Timer getTimer() {
+            return timer;
+        }
 
-    public void setTimer(Timer timer) {
-        this.timer = timer;
-    }
-
+        public void setTimer(Timer timer) {
+            this.timer = timer;
+        }
+    */
     public int getNoOfPlayers() {
         return noOfPlayers;
     }

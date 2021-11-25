@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="https//thymeleaf.org" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/aesthetic.css}"/>
+        <title>This is a two player game :D</title>
+    </head>
+    <body>
+
+    <header>
+        <div th:include="generalComponents :: headerContent"></div>
+    </header>
+        <div class="container main">
+            <div th:switch="${categories}" class="container second">
+                <h2 th:case="null" class="container pseudoRow">No questions yet!</h2>
+                <div th:case="*" class="container pseudoRow">
+                    <h2> Pick a category! 2player lolz </h2>
+                    <form th:each="c:${categories}" th:action="@{'/category2/'+${c.ID}}" method="get" class="pseudoCol">
+                        <button th:text="${c.categoryName}"></button>
+                    </form>
+                </div>
+                <a th:href="@{/}" class="button">Quit</a>
+            </div>
+        </div>
+
+        <th:block th:insert="generalComponents :: footer"></th:block>
+
+    </body>
+</html>

@@ -9,8 +9,11 @@ import java.util.List;
 public interface QuizService {
     // Question Stuff
     List<Question> findAll();
-   /* Question findById(long ID);
     Question save(Question question);
+    int incrementNoOfQuestion();
+    int getNoOfQuestions();
+   /* Question findById(long ID);
+
     void delete(Question question);
 
 

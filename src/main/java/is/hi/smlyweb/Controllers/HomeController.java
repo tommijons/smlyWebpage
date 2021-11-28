@@ -29,7 +29,7 @@ public class HomeController {
 
     @GetMapping("/basics")
     public String basics(){
-        return "about";
+        return "basics";
     }
 
     @GetMapping("/related")

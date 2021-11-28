@@ -11,6 +11,39 @@
 </header>
 <div class="container main">
     <div class="container second">
+        <div th:switch="${questions}" class="container second">
+            <div th:case="null" class="container col">
+                <h2 th:text="'You scored ' + ${userscore}+' points!'"></h2>
+                <form action="#" th:action="@{/scores}" th:object="${scores}"  method="post" class="form">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" th:field="*{username}"/>
+                    <input class="hidden"type="score"th:field="*{score}" name="score" id="score" th:attr="value = ${userscore}">
+                    <input type="submit" value="Add score to scoreboard" class="button"/>
+                </form>
+                <div class="container col roundedBorder bg">
+                    <div class="container row">
+                        <h2>Player answers</h2>
+                        <h2>Correct answers</h2>
+                    </div>
+                    <div th:each="c, stats:${answers}" class="container row">
+                        <span th:class="${c}==${correctanswers[stats.index]}? right:wrong" th:text="${c}"></span>
+                        <span th:text="${correctanswers[stats.index]}"></span>
+                    </div>
+                </div>
+            </div>
+            <div th:case="*">
+                <div th:each="q:${questions}">
+                    <h2 th:if="${counter!=0}" th:text="'Question ' + ${counter}"></h2>
+                    <form action="#" th:action="@{/quiz}" method="post" class="col">
+                        <h2 class="border" th:text="${q.questionText}"></h2>
+                        <input type="submit" class="button" th:name="option" th:field="${q.optionA}" th:value="${q.optionA}"/>
+                        <input type="submit" class="button" th:name="option" th:field="${q.optionB}" th:value="${q.optionB}"/>
+                        <input type="submit" class="button" th:name="option" th:field="${q.optionC}" th:value="${q.optionC}"/>
+                        <input type="submit" class="button" th:name="option" th:field="${q.optionD}" th:value="${q.optionD}"/>
+                    </form>
+                </div>
+            </div>
+        </div>
         <h1>Coming soon</h1>
     </div>
 </div>

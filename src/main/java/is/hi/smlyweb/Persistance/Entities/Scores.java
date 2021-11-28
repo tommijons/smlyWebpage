@@ -25,7 +25,7 @@ public class Scores {
     }
 
     public void setScore(int score) {
-        this.score += score;
+        this.score = score;
     }
 
     public String getUsername() {

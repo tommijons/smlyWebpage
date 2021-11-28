@@ -10,17 +10,24 @@ public interface QuizService {
     // Question Stuff
     List<Question> findAll();
     Question save(Question question);
-    int incrementNoOfQuestion();
+   /* Question findById(long ID);*/
+
+    //void delete(Question question);
+
+     // Question helper stuff
     int getNoOfQuestions();
-   /* Question findById(long ID);
+    int resetNoOfQuestions();
+    int incrementNoOfQuestion();
+    //int resetScore();
+    int addScore(int score);
+    int getScore();
+    void addAnswer(String answer, String correctAns);
+    void resetAnswers();
+    List<String> getAnswers();
+    List<String> getCorrectAnswers();
 
-    void delete(Question question);
-
-
-    // Scores
-    List <Scores> findByAccountID(long accountID);
+    List <Scores> findAllScores();
+    int resetScore();
     Scores saveScores(Scores scores);
-    List <Scores> findAllScores();*/
-
 
 }

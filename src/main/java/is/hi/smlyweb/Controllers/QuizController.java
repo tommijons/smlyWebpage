@@ -1,6 +1,5 @@
 package is.hi.smlyweb.Controllers;
 import is.hi.smlyweb.Persistance.Entities.*;
-import is.hi.smlyweb.Services.AccountService;
 import is.hi.smlyweb.Services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,19 +7,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
-import is.hi.smlyweb.Services.QuizService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class QuizController {
     private QuizService quizService;
+    private int counter=0;
 
     @Autowired
     public QuizController(QuizService quizService) {
@@ -29,8 +23,74 @@ public class QuizController {
 
 
     @GetMapping("/quiz")
-    public String style(){
-        System.out.println("QUESTION: "+quizService.findAll().get(0).getQuestionText());
+    public String getQuestions(Model model,Scores scores){
+        // Security dót sov það sé ekki hægt setja allt í input
+        //String safe = Jsoup.clean(unsafe, Whitelist.basic());
+
+        if(quizService.getNoOfQuestions()==0)quizService.resetAnswers();
+        Question nextQuestion;
+        int score=quizService.getScore();
+        nextQuestion = getNextQuestion();
+
+        // One player answer lists to be displayed for one player game
+        List<String>correctAnswers =quizService.getCorrectAnswers();
+        List<String>answers =quizService.getAnswers();
+        System.out.println(quizService.getCorrectAnswers());
+        System.out.println(quizService.getAnswers());
+
+        // Make lists for the correct questions to their answered to be matched in thymeleaf
+        List<Question> questions = quizService.findAll();
+        model.addAttribute("questions",nextQuestion);
+        model.addAttribute("counter",counter);
+        model.addAttribute("userscore",score);
+        model.addAttribute("answers",answers);
+        model.addAttribute("correctanswers",correctAnswers);
         return "quiz";
+    }
+
+    // Helper function to check if answer is correct and adds scores and statistics
+    @RequestMapping(value="/quiz",method=RequestMethod.POST)
+    public String checkAnswer(@RequestParam(value = "option", required = false) String option,Question question, BindingResult result,Model model,Scores scores){
+        List<Question> allQuestions = quizService.findAll();
+        String questionAnswer = allQuestions.get(quizService.getNoOfQuestions()-1).getCorrectAnswer();
+        quizService.addAnswer(option, questionAnswer);
+        if(questionAnswer.equals(option)){
+                quizService.addScore(100);
+        }
+        return"redirect:/quiz";
+    }
+
+    // Helper function to get next question when button is clicked and keeps count of questions.
+    // Param is the id of chosen category.
+    // Returns: A question object
+    public Question getNextQuestion(){
+        List<Question> allQuestions = quizService.findAll();
+        if(quizService.getNoOfQuestions()< allQuestions.size()){
+            Question question = allQuestions.get(quizService.getNoOfQuestions());
+            // Increment to get next question
+            quizService.incrementNoOfQuestion();
+            counter=allQuestions.indexOf(question)+1;
+            return question;
+        }
+        quizService.resetNoOfQuestions();
+        quizService.resetScore();
+        return null;
+    }
+
+    @RequestMapping(value = "/scores", method = RequestMethod.GET)
+    public String scores(Scores scores, Model model){
+        for(Scores s:quizService.findAllScores())System.out.println("SCORES: "+scores.getScore()+" "+ scores.getUsername());
+        model.addAttribute("scores",quizService.findAllScores());
+        return "scores";
+    }
+
+    @RequestMapping(value="/scores",method=RequestMethod.POST)
+    public String postResults(Scores scores, BindingResult result, Model model){
+        if(result.hasErrors()){
+            return "redirect:/";
+        }
+        if(!scores.getUsername().isEmpty())quizService.saveScores(scores);
+
+        return "redirect:/scores";
     }
 }

@@ -13,7 +13,13 @@
     <div class="container second">
         <h1>Basics</h1>
         <h2>How to get a SmileyCoin Wallet</h2>
+        <p>The core wallet for Smileycoin is available for several operating systems. For Linux its only available as source code, which is ready to compile and install for Ubuntu. Components may need to be installed for other Linux versions. For Windows and OSX a binary version is available. This is typically a bit behind the Linux version.</p>
+        <p>An HTML5 wallet is also available at <a href="https://wallet.smileyco.in">wallet.smileyco.in</a> and runs directly in the browser. Be specially careful to store the passphrase.</p>
+        <p>For tablets and phones a Coinomi wallet is available (Android and iOS). Searching for Coinomi in the appropriate store should work. This is a stable wallet and appropriate for users not wanting any extra features developed specifically on the SMLY chain (such as on-chain services, voting or traceability).</p>
         <h2>How to send a transaction</h2>
+        <p>There are several ways to send a transaction, depending on the type of walley you have. You can use the command 'sendtoaddress' in the core wallet command line. If you have a GUI walley, you can simply use the send button. In either case, you need to type in the address you want to send to and the amount.</p>
+        <p>You can also send a raw transaction. A raw transaction is a transaction in raw bytes. You first need to find an unspent transaction using the command 'listunspent'. Next you create the transaction with createrawtransaction with information about txid, vout, address and amount.</p>
+        <p>Next you sign the transaction with the command 'signrawtransaction' with the output from createrawtransaction. And finally you can send the transaction with the command 'sendrawtransaction' and the output string from the signiture.</p>
         <h2>How to write data into the blockchain</h2>
         <h2>How to set up a multisig address</h2>
     </div>

@@ -225,3 +225,13 @@ button:hover, .button:hover {
     min-width:40vh;
     min-height:40vh;
 }
+
+ol{
+    margin:10px;
+    max-width:60vh ;
+    min-width:60vh;
+    word-wrap: break-word;
+}
+.bold{
+    font-weight: bold;
+}

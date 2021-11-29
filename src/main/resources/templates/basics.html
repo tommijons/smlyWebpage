@@ -22,6 +22,51 @@
         <p>Next you sign the transaction with the command 'signrawtransaction' with the output from createrawtransaction. And finally you can send the transaction with the command 'sendrawtransaction' and the output string from the signiture.</p>
         <h2>How to write data into the blockchain</h2>
         <h2>How to set up a multisig address</h2>
+        <h2>Setting up a command-line Smileycoin wallet (Linux) on Mac OS</h2>
+        <p>To be able to use the command-line wallet one must have a Linux system so in this chapter we will be going through the steps of installing the wallet on a Mac OS with the help of Virtual Box. There are multiple ways of setting up a command-line wallet for a mac, this just demonstrates one way of doing it. </p>
+
+        <h3>Install Virtual Box and Ubuntu</h3>
+        <ol>
+            <li>Install virtual box from <a th:href="@{https://www.virtualbox.org/}"> here</a> </li>
+            <li>Install Ubuntu LTS version from <a th:href="@{https://ubuntu.com/download/desktop}"> here</a></li>
+            <li>Set up your virtual machine and ubuntu</li>
+            <dd>For detailed instructions check out <a th:href="@{https://codingwithmanny.medium.com/installing-ubuntu-18-04-on-mac-os-with-virtualbox-ac3b39678602}"/> this website </a></dd>
+        </ol>
+
+        <h3>Set up wallet in a container</h3>
+        <p>Once everything is installed and you have your machine ready, open the terminal on your virtual machine
+            and do the following steps:
+        </p>
+        <ol>
+            <ul class="bold">Step One</ul>
+            <li>sudo apt-get install lxd</li>
+            <li>sudo lxd init</li>
+            <li>sudo lxc launch ubuntu:20.04 containerName</li>
+            <dd>containerName will be the name of the lxd container.</dd>
+        </ol>
+
+        <ol>
+            <ul class="bold">Step Two - as a root in the container</ul>
+            <li>sudo lxc exec containerName -- bin/bash</li>
+            <li>apt update</li>
+            <li>apt-get upgrade</li>
+            <li>apt install debhelper libssl-dev openssh-client openssh-server build-essential pkg-config libtool autotools-dev autoconf libboost-all-dev libdb-dev libdb++-dev</li>
+            <li>adduser myUser</li>
+        </ol>
+        <ol>
+            <ul class="bold">Step Three - as the user in the container</ul>
+            <li>lxc exec containerName -- su myUser</li>
+            <li>git clone https://github.com/smileycoin/smileyCoin</li>
+            <li>cd smileyCoin</li>
+            <li>./autogen.sh</li>
+            <li>./configure</li>
+            <li>make</li>
+        </ol>
+        <p>Then the wallet should be ready in your container!</p>
+        <p class="bold">Sources: </p>
+        <p><a th:href="@{https://codingwithmanny.medium.com/installing-ubuntu-18-04-on-mac-os-with-virtualbox-ac3b39678602}">codingwithmanny.medium.com</a></p>
+        <p><a th:href="@{https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-lxd-on-ubuntu-20-04}">www.digitalocean.com</a></p>
+        <p><a th:href="@{https://tutor-web.net/comp/crypto251.0/lec00260/sl00430}"> tutor-web.net</a></p>
     </div>
 </div>
 <th:block th:insert="generalComponents :: footer"> </th:block>

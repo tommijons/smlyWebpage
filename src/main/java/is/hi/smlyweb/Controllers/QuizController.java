@@ -35,8 +35,6 @@ public class QuizController {
         // One player answer lists to be displayed for one player game
         List<String>correctAnswers =quizService.getCorrectAnswers();
         List<String>answers =quizService.getAnswers();
-        System.out.println(quizService.getCorrectAnswers());
-        System.out.println(quizService.getAnswers());
 
         // Make lists for the correct questions to their answered to be matched in thymeleaf
         List<Question> questions = quizService.findAll();
@@ -79,7 +77,6 @@ public class QuizController {
 
     @RequestMapping(value = "/scores", method = RequestMethod.GET)
     public String scores(Scores scores, Model model){
-        for(Scores s:quizService.findAllScores())System.out.println("SCORES: "+scores.getScore()+" "+ scores.getUsername());
         model.addAttribute("scores",quizService.findAllScores());
         return "scores";
     }

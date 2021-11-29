@@ -56,6 +56,8 @@ header, footer{
 .main{
     min-height: 84vh;
     width: 100%;
+    /*Testing með background*/
+   /* background-image: url("images/background.jpeg"); */
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -66,15 +68,22 @@ header, footer{
 }
 
 .second{
+    max-width: 104vh;
     min-height: 84vh;
-    min-width: 50%;
+    min-width: 800px;
     background: #83ccff;
     flex-direction: column;
     justify-content: center;
     justify-items: center;
     padding: 1rem;
+    word-wrap: break-word;
 }
-
+.text {
+    flex-direction: column;
+}
+p {
+    text-align:left;
+}
 .col{
     flex-direction: column;
     justify-content: space-between;
@@ -110,7 +119,6 @@ header, footer{
 }
 
 form, table {
-    width: 90%;
     display: flex;
     justify-items: center;
     align-content: center;
@@ -149,7 +157,9 @@ form, table {
 
 
 }
-
+a.button {
+    min-width:600px;
+}
 .form>*{
     width: 10rem;
     padding: 0.5rem 1.5rem;
@@ -204,4 +214,12 @@ button:hover, .button:hover {
 
 .hidden {
     display:none;
+}
+
+
+.image {
+    background-image: url("images/smiley.png");
+    background-repeat: no-repeat;
+    min-width:40vh;
+    min-height:40vh;
 }

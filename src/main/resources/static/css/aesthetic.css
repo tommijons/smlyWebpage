@@ -62,8 +62,11 @@ header, footer{
     align-items: center;
     align-content: center;
 }
-
 .main{
+    justify-content: center;
+    justify-items: center;
+}
+.main, .basics {
     min-height: 84vh;
     width: 100%;
     /*Testing með background*/
@@ -73,8 +76,7 @@ header, footer{
     background-size: cover;
     position: relative;
     flex-direction: row;
-    justify-content: center;
-    justify-items: center;
+
 }
 
 .second{
@@ -240,4 +242,23 @@ ol{
 }
 .bold{
     font-weight: bold;
+}
+
+.basics {
+    justify-content: flex-start;
+    justify-items: center;
+    align-items: flex-start;
+}
+.side{
+    float:left;
+    max-width:20%;
+    flex-direction:column;
+    margin:40px;
+}
+.sideText{
+    font-weight: bold;
+    color: black;
+    min-width: 300px;
+    margin:10px;
+
 }

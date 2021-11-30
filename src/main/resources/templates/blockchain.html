@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/aesthetic.css}"/>
+    <title>Transaction</title>
+</head>
+<body>
+<header>
+    <span th:include="generalComponents :: headerContent"></span>
+</header>
+
+<div class="container basics">
+    <div class="container side">
+        <a th:href="@{/basics/wallet}" class="sideText">How to get a SmileyCoin Wallet</a>
+        <a th:href="@{/basics/transaction}" class="sideText">How to send a transaction</a>
+        <a th:href="@{/basics/multisig}" class="sideText">How to set up a multisig address</a>
+        <a th:href="@{/basics/blockchain}" class="sideText">How to write data into the blockchain</a>
+        <a th:href="@{/basics/command-line-wallet}" class="sideText">Setting up a command-line Smileycoin wallet</a>
+    </div>
+    <div class="container second">
+        <h2>How to write data into the blockchain</h2>
+        <p>In principle possible to use all sorts of methods to write data into the blockchain. The most straight forward is to use the createrawtransaction command, which has an optional data parameter. Example: createrawtransaction'[{"txid":"myid","vout":0}]' '{"address":100,"data":" the message you want to write on the blockchain converted in hex"}:'</p>
+        <p>Then you sign and send the transaction like explained above. After that you can decode the raw transaction using the decoderawtransaction command, and you should see the message you wrote under "asm" : "OP_RETURN “the hex string you wrote”"</p>
+    </div>
+</div>
+
+</body>
+</html>

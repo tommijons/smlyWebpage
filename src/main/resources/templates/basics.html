@@ -9,70 +9,24 @@
 <header>
     <span th:include="generalComponents :: headerContent"></span>
 </header>
-<div class="container main">
+
+<div class="container basics">
+
+    <div class="container side">
+        <a th:href="@{/basics/wallet}" class="sideText">How to get a SmileyCoin Wallet</a>
+        <a th:href="@{/basics/transaction}" class="sideText">How to send a transaction</a>
+        <a th:href="@{/basics/multisig}" class="sideText">How to set up a multisig address</a>
+        <a th:href="@{/basics/blockchain}" class="sideText">How to write data into the blockchain</a>
+        <a th:href="@{/basics/command-line-wallet}" class="sideText">Setting up a command-line Smileycoin wallet</a>
+    </div>
+
     <div class="container second">
         <h1>Basics</h1>
         <h2>How to get a SmileyCoin Wallet</h2>
         <p>The core wallet for Smileycoin is available for several operating systems. For Linux its only available as source code, which is ready to compile and install for Ubuntu. Components may need to be installed for other Linux versions. For Windows and OSX a binary version is available. This is typically a bit behind the Linux version.</p>
         <p>An HTML5 wallet is also available at <a href="https://wallet.smileyco.in">wallet.smileyco.in</a> and runs directly in the browser. Be specially careful to store the passphrase.</p>
         <p>For tablets and phones a Coinomi wallet is available (Android and iOS). Searching for Coinomi in the appropriate store should work. This is a stable wallet and appropriate for users not wanting any extra features developed specifically on the SMLY chain (such as on-chain services, voting or traceability).</p>
-        <h2>How to send a transaction</h2>
-        <p>There are several ways to send a transaction, depending on the type of walley you have. You can use the command 'sendtoaddress' in the core wallet command line. If you have a GUI walley, you can simply use the send button. In either case, you need to type in the address you want to send to and the amount.</p>
-        <p>You can also send a raw transaction. A raw transaction is a transaction in raw bytes. You first need to find an unspent transaction using the command 'listunspent'. Next you create the transaction with createrawtransaction with information about txid, vout, address and amount.</p>
-        <p>Next you sign the transaction with the command 'signrawtransaction' with the output from createrawtransaction. And finally you can send the transaction with the command 'sendrawtransaction' and the output string from the signiture.</p>
-        <h2>How to set up a multisig address</h2>
-        <p>Multisig allows users to have one smileycoin address with multiple key holders, so funds from the address cannot be spent until all key holders sign off on it. In order to create a multisig address, you will need two or more public public keys to generate it.</p>
-        <p>We have two methods for generating the address. One is the command createmultisig. Example: createmultisig 3 ‘[“publickey1", "publickey2", "publickey3”]' </p>
-        <p>The other is the addmultisigaddress command: addmultisigaddress 3 ‘[“publickey1", "publickey2", "publickey3”]'</p>
-        <p>The output from the command is the “multisig address”. After you´ve sent some amount to the multisig address, you can send transaction from it. All key holders will need to sign the transaction.</p>
-        <h2>How to write data into the blockchain</h2>
-        <p>In principle possible to use all sorts of methods to write data into the blockchain. The most straight forward is to use the createrawtransaction command, which has an optional data parameter. Example: createrawtransaction'[{"txid":"myid","vout":0}]' '{"address":100,"data":" the message you want to write on the blockchain converted in hex"}:'</p>
-        <p>Then you sign and send the transaction like explained above. After that you can decode the raw transaction using the decoderawtransaction command, and you should see the message you wrote under "asm" : "OP_RETURN “the hex string you wrote”"</p>
-        <h2>Setting up a command-line Smileycoin wallet (Linux) on Mac OS</h2>
-        <p>To be able to use the command-line wallet one must have a Linux system so in this chapter we will be going through the steps of installing the wallet on a Mac OS with the help of Virtual Box. There are multiple ways of setting up a command-line wallet for a mac, this just demonstrates one way of doing it. </p>
 
-        <h3>Install Virtual Box and Ubuntu</h3>
-        <ol>
-            <li>Install virtual box from <a th:href="@{https://www.virtualbox.org/}"> here</a> </li>
-            <li>Install Ubuntu LTS version from <a th:href="@{https://ubuntu.com/download/desktop}"> here</a></li>
-            <li>Set up your virtual machine and ubuntu</li>
-            <dd>For detailed instructions check out <a th:href="@{https://codingwithmanny.medium.com/installing-ubuntu-18-04-on-mac-os-with-virtualbox-ac3b39678602}"/> this website </a></dd>
-        </ol>
-
-        <h3>Set up wallet in a container</h3>
-        <p>Once everything is installed and you have your machine ready, open the terminal on your virtual machine
-            and do the following steps:
-        </p>
-        <ol>
-            <ul class="bold">Step One</ul>
-            <li>sudo apt-get install lxd</li>
-            <li>sudo lxd init</li>
-            <li>sudo lxc launch ubuntu:20.04 containerName</li>
-            <dd>containerName will be the name of the lxd container.</dd>
-        </ol>
-
-        <ol>
-            <ul class="bold">Step Two - as a root in the container</ul>
-            <li>sudo lxc exec containerName -- bin/bash</li>
-            <li>apt update</li>
-            <li>apt-get upgrade</li>
-            <li>apt install debhelper libssl-dev openssh-client openssh-server build-essential pkg-config libtool autotools-dev autoconf libboost-all-dev libdb-dev libdb++-dev</li>
-            <li>adduser myUser</li>
-        </ol>
-        <ol>
-            <ul class="bold">Step Three - as the user in the container</ul>
-            <li>lxc exec containerName -- su myUser</li>
-            <li>git clone https://github.com/smileycoin/smileyCoin</li>
-            <li>cd smileyCoin</li>
-            <li>./autogen.sh</li>
-            <li>./configure</li>
-            <li>make</li>
-        </ol>
-        <p>Then the wallet should be ready in your container!</p>
-        <p class="bold">Sources: </p>
-        <p><a th:href="@{https://codingwithmanny.medium.com/installing-ubuntu-18-04-on-mac-os-with-virtualbox-ac3b39678602}">codingwithmanny.medium.com</a></p>
-        <p><a th:href="@{https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-lxd-on-ubuntu-20-04}">www.digitalocean.com</a></p>
-        <p><a th:href="@{https://tutor-web.net/comp/crypto251.0/lec00260/sl00430}"> tutor-web.net</a></p>
     </div>
 </div>
 <th:block th:insert="generalComponents :: footer"> </th:block>

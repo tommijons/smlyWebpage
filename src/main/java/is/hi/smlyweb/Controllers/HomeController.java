@@ -13,35 +13,59 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
+    QuizService qs;
     @Autowired
-    public HomeController() {
+    public HomeController(QuizService qs) {
+        this.qs=qs;
     }
 
     @GetMapping("/")
     public String home(){
+        qs.resetNoOfQuestions();
         return "home";
     }
 
     @GetMapping("/about")
     public String about(){
+        qs.resetNoOfQuestions();
         return "about";
     }
 
     @GetMapping("/basics")
     public String basics(){
+        qs.resetNoOfQuestions();
         return "basics";
     }
 
     @GetMapping("/related")
     public String related(){
+        qs.resetNoOfQuestions();
         return "related";
     }
-
     @GetMapping("/team")
     public String team(){
         return "team";
     }
-
+    @GetMapping("/basics/transaction")
+    public String transaction(){
+        return "transaction";
+    }
+    @GetMapping("/basics/multisig")
+    public String multisig(){
+        return "multisig";
+    }
+    @GetMapping("/basics/blockchain")
+    public String blockchain(){
+        return "blockchain";
+    }
+    @GetMapping("/basics/command-line-wallet")
+    public String commandLineWallet(){
+        return "commandLineWallet";
+    }
+    @GetMapping("/basics/wallet")
+    public String wallet(){
+        return "basics";
+    }
 
 
 

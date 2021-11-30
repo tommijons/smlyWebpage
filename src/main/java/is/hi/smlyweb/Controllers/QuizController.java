@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class QuizController {
     private QuizService quizService;
-    private int counter=0;
+    public int counter=0;
 
     @Autowired
     public QuizController(QuizService quizService) {
@@ -35,7 +35,6 @@ public class QuizController {
         // One player answer lists to be displayed for one player game
         List<String>correctAnswers =quizService.getCorrectAnswers();
         List<String>answers =quizService.getAnswers();
-
         // Make lists for the correct questions to their answered to be matched in thymeleaf
         List<Question> questions = quizService.findAll();
         model.addAttribute("questions",nextQuestion);
@@ -50,11 +49,12 @@ public class QuizController {
     @RequestMapping(value="/quiz",method=RequestMethod.POST)
     public String checkAnswer(@RequestParam(value = "option", required = false) String option,Question question, BindingResult result,Model model,Scores scores){
         List<Question> allQuestions = quizService.findAll();
-        String questionAnswer = allQuestions.get(quizService.getNoOfQuestions()-1).getCorrectAnswer();
+        String questionAnswer = allQuestions.get(quizService.getNoOfQuestions()).getCorrectAnswer();
         quizService.addAnswer(option, questionAnswer);
         if(questionAnswer.equals(option)){
                 quizService.addScore(100);
         }
+        quizService.incrementNoOfQuestion();
         return"redirect:/quiz";
     }
 
@@ -66,7 +66,7 @@ public class QuizController {
         if(quizService.getNoOfQuestions()< allQuestions.size()){
             Question question = allQuestions.get(quizService.getNoOfQuestions());
             // Increment to get next question
-            quizService.incrementNoOfQuestion();
+
             counter=allQuestions.indexOf(question)+1;
             return question;
         }

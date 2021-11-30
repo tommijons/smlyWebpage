@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/aesthetic.css}"/>
+  <title>Transaction</title>
+</head>
+<body>
+<header>
+  <span th:include="generalComponents :: headerContent"></span>
+</header>
+
+
+<div class="container basics">
+  <div class="container side">
+    <a th:href="@{/basics/wallet}" class="sideText">How to get a SmileyCoin Wallet</a>
+    <a th:href="@{/basics/transaction}" class="sideText">How to send a transaction</a>
+    <a th:href="@{/basics/multisig}" class="sideText">How to set up a multisig address</a>
+    <a th:href="@{/basics/blockchain}" class="sideText">How to write data into the blockchain</a>
+    <a th:href="@{/basics/command-line-wallet}" class="sideText">Setting up a command-line Smileycoin wallet</a>
+  </div>
+  <div class="container second">
+    <h2>How to send a transaction</h2>
+    <p>There are several ways to send a transaction, depending on the type of walley you have. You can use the command 'sendtoaddress' in the core wallet command line. If you have a GUI walley, you can simply use the send button. In either case, you need to type in the address you want to send to and the amount.</p>
+    <p>You can also send a raw transaction. A raw transaction is a transaction in raw bytes. You first need to find an unspent transaction using the command 'listunspent'. Next you create the transaction with createrawtransaction with information about txid, vout, address and amount.</p>
+    <p>Next you sign the transaction with the command 'signrawtransaction' with the output from createrawtransaction. And finally you can send the transaction with the command 'sendrawtransaction' and the output string from the signiture.</p>
+  </div>
+</div>
+
+
+</body>
+</html>

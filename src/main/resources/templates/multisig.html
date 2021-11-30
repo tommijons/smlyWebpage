@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/aesthetic.css}"/>
+    <title>Transaction</title>
+</head>
+<body>
+<header>
+    <span th:include="generalComponents :: headerContent"></span>
+</header>
+
+<div class="container basics">
+    <div class="container side">
+        <a th:href="@{/basics/wallet}" class="sideText">How to get a SmileyCoin Wallet</a>
+        <a th:href="@{/basics/transaction}" class="sideText">How to send a transaction</a>
+        <a th:href="@{/basics/multisig}" class="sideText">How to set up a multisig address</a>
+        <a th:href="@{/basics/blockchain}" class="sideText">How to write data into the blockchain</a>
+        <a th:href="@{/basics/command-line-wallet}" class="sideText">Setting up a command-line Smileycoin wallet</a>
+    </div>
+    <div class="container second">
+        <h2>How to set up a multisig address</h2>
+        <p>Multisig allows users to have one smileycoin address with multiple key holders, so funds from the address cannot be spent until all key holders sign off on it. In order to create a multisig address, you will need two or more public public keys to generate it.</p>
+        <p>We have two methods for generating the address. One is the command createmultisig. Example: createmultisig 3 ‘[“publickey1", "publickey2", "publickey3”]' </p>
+        <p>The other is the addmultisigaddress command: addmultisigaddress 3 ‘[“publickey1", "publickey2", "publickey3”]'</p>
+        <p>The output from the command is the “multisig address”. After you´ve sent some amount to the multisig address, you can send transaction from it. All key holders will need to sign the transaction.</p>
+
+    </div>
+</div>
+</body>
+</html>

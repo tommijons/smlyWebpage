@@ -32,6 +32,7 @@
                 </div>
             </div>
             <div th:case="*">
+                <h2 th:text="${timer}"></h2>
                 <div th:each="q:${questions}">
                     <h2 th:if="${counter!=0}" th:text="'Question ' + ${counter}"></h2>
                     <form action="#" th:action="@{/quiz}" method="post" class="col">

@@ -47,8 +47,7 @@ public class QuizServiceImplementation implements QuizService {
         quizRepository.save(new Question(0, "What is op code is used to validate a signature ?","OP_CHECKSIG","OP_SHA1","OP_CHECKSIG","OP_VER","OP_VERIFY"));
         quizRepository.save(new Question(0, "What is scriptPubKey ?","A script which controls how bitcoin can be spent","A script which unlocks a UTXO for spending","A script which contains all UTXO","A script which controls how bitcoin can be spent","A script which verifies a private key"));
         quizRepository.save(new Question(0, "What kind of string is used to write data on the blockchain ?","A hex string","A binary string","An octal string","A hex string","A regular string"));
-*/
-
+       */
     }
 
 

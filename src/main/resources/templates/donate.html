@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/aesthetic.css}"/>
+    <title>Donate</title>
+</head>
+<body>
+<header>
+    <span th:include="generalComponents :: headerContent"></span>
+</header>
+<div class="container main">
+    <div class="container second">
+        <div class="image"></div>
+        <h1>Donate to support the website and more</h1>
+        <div class="container col">
+            <p>The Smiley coin quiz website will happily accept any donation. We will use the donations for upkeep and to update the website by adding more features, e.g. adding more questions to the quiz and making your experience as pleasant as possible.</p>
+            <h2>Donation process</h2>
+            <p>It's a simple procedure donating to us if you already have a wallet with some coins, simply go to your wallet and send some SMLY to the address: <b>3Cx2khfkynC4HZYZQjaiVvabPPrnNfgX72</b>.</p>
+            <p>If you don't already have a wallet then please go to the download page to find the right wallet for you! There are also four ways to gain some SMLYs:</p>
+            <ol>
+                <li>Donate to Education in a Suitcase</li>
+                <li>Studying in the tutor website</li>
+                <li>Buy SMLYs at a cryptocurrency exchange</li>
+                <li>Use the SMLY ATM</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<th:block th:insert="generalComponents :: footer"> </th:block>
+</body>
+</html>
+</html>

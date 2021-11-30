@@ -42,6 +42,9 @@ public class HomeController {
         return "team";
     }
 
+    @GetMapping("/donate")
+    public String donate(){ return "donate";}
+
 
 
 

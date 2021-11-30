@@ -45,6 +45,7 @@ public class HomeController {
 
     @GetMapping("/team")
     public String team(){
+        qs.resetNoOfQuestions();
         return "team";
     }
     @GetMapping("/basics/transaction")
@@ -69,10 +70,8 @@ public class HomeController {
     }
 
     @GetMapping("/donate")
-    public String donate(){ return "donate";}
-
-
-
-
-
+    public String donate(){
+        qs.resetNoOfQuestions();
+        return "donate";
+    }
 }

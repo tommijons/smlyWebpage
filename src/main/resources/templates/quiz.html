@@ -12,6 +12,7 @@
 <div class="container main">
     <div class="container second">
         <div th:switch="${questions}" class="container second">
+            <h1>SmileyCoin Quiz</h1>
             <div th:case="null" class="container col">
                 <h2 th:text="'You scored ' + ${userscore}+' points!'"></h2>
                 <form action="#" th:action="@{/scores}" th:object="${scores}"  method="post" class="form">
@@ -45,7 +46,6 @@
                 </div>
             </div>
         </div>
-        <h1>Coming soon</h1>
     </div>
 </div>
 <th:block th:insert="generalComponents :: footer"> </th:block>

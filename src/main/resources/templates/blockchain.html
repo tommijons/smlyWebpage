@@ -20,8 +20,8 @@
     </div>
     <div class="container second">
         <h2>How to write data into the blockchain</h2>
-        <p>In principle possible to use all sorts of methods to write data into the blockchain. The most straight forward is to use the createrawtransaction command, which has an optional data parameter. Example: createrawtransaction'[{"txid":"myid","vout":0}]' '{"address":100,"data":" the message you want to write on the blockchain converted in hex"}:'</p>
-        <p>Then you sign and send the transaction like explained above. After that you can decode the raw transaction using the decoderawtransaction command, and you should see the message you wrote under "asm" : "OP_RETURN “the hex string you wrote”"</p>
+        <p>In principle it is possible to use all sorts of methods to write data into the blockchain. The most straight forward is to use the createrawtransaction command, which has an optional data parameter. Example: createrawtransaction'[{"txid":"myid","vout":0}]' '{"address":100,"data":" the message you want to write on the blockchain converted in hex"}:'</p>
+        <p>After you have signed and sent the transaction, you can decode the raw transaction using the decoderawtransaction command, and you should see the message you wrote under "asm" : "OP_RETURN “the hex string you wrote”"</p>
     </div>
 </div>
 

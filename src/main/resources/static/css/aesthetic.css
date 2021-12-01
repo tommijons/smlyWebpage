@@ -49,8 +49,8 @@ header, footer{
     width: 100%;
     background-color: #4d9ac4;
     display: flex;
+    justify-content: center;
     flex-direction: row;
-    justify-content: flex-start;
     align-items: center;
     align-content: center;
     padding: 0.25rem 0.5rem;

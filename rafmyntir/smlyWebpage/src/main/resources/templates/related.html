@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/aesthetic.css}"/>
+    <title>Title</title>
+</head>
+<body>
+<header>
+    <span th:include="generalComponents :: headerContent"></span>
+</header>
+<div class="container main">
+    <div class="container second">
+        <h1>Related information</h1>
+        <a href="https://smileyco.in/#/" class="button">Official SmileyCoin website</a>
+        <a href="https://twitter.com/smileycoinnews" class="button">SmileyCoin twitter</a>
+        <a href="http://educationinasuitcase.com/" class="button">Education in a suitcase</a>
+        <a href="https://tutor-web.net/" class="button">Tutor-Web</a>
+        <a href="https://chainz.cryptoid.info/smly/" class="button">Blockchain Explorer</a>
+        <a href="https://github.com/smileycoin/smileyCoin" class="button">SMLY wallet source</a>
+    </div>
+</div>
+<th:block th:insert="generalComponents :: footer"> </th:block>
+</body>
+</html>
+</html>

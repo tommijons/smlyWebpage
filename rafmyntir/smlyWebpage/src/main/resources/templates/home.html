@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/aesthetic.css}"/>
+    <title>Home</title>
+</head>
+<body>
+<header>
+    <span th:include="generalComponents :: headerContent"></span>
+</header>
+<div class="container main">
+    <div class="container second">
+        <h1>Welcome to the SmileyCoin Website</h1>
+        <div><img src="https://chainz.cryptoid.info/logo/smly.png" alt="smiley" style="width:300px;height:300px;"></div>
+    </div>
+</div>
+<th:block th:insert="generalComponents :: footer"> </th:block>
+</body>
+</html>

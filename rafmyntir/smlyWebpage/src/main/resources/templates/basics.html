@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/aesthetic.css}"/>
+    <title>Basics</title>
+</head>
+<body>
+<header>
+    <span th:include="generalComponents :: headerContent"></span>
+</header>
+
+<div class="container basics">
+
+    <div class="container side col">
+        <a th:href="@{/basics/wallet}" class="sideText">How to get a SmileyCoin Wallet</a>
+        <a th:href="@{/basics/transaction}" class="sideText">How to send a transaction</a>
+        <a th:href="@{/basics/multisig}" class="sideText">How to set up a multisig address</a>
+        <a th:href="@{/basics/blockchain}" class="sideText">How to write data into the blockchain</a>
+        <a th:href="@{/basics/command-line-wallet}" class="sideText">Setting up a command-line Smileycoin wallet</a>
+    </div>
+
+    <div class="container second">
+        <h1>Basics</h1>
+        <h2>How to get a SmileyCoin Wallet</h2>
+        <p>The core wallet for Smileycoin is available for several operating systems. For Linux its only available as source code, which is ready to compile and install for Ubuntu. Components may need to be installed for other Linux versions. For Windows and OSX a binary version is available. This is typically a bit behind the Linux version.</p>
+        <p>An HTML5 wallet is also available at <a href="https://wallet.smileyco.in">wallet.smileyco.in</a> and runs directly in the browser. Be specially careful to store the passphrase.</p>
+        <p>For tablets and phones a Coinomi wallet is available (Android and iOS). Searching for Coinomi in the appropriate store should work. This is a stable wallet and appropriate for users not wanting any extra features developed specifically on the SMLY chain (such as on-chain services, voting or traceability).</p>
+
+    </div>
+</div>
+<th:block th:insert="generalComponents :: footer"> </th:block>
+</body>
+</html>
+</html>

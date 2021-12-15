@@ -253,10 +253,11 @@ ol{
     float:left;
     max-width:20%;
     flex-direction:column;
-    margin:40px;
+    margin:10px 0px 10px 20px;
 }
 .sideText{
     font-weight: bold;
+    font-size: smaller;
     color: black;
     min-width: 300px;
     margin:10px;
